@@ -9,15 +9,20 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/" class="nav-link fs-4">Home</RouterLink>
         <RouterLink to="/ex1" class="nav-link fs-4">Ex1</RouterLink>
         <RouterLink to="/ex2" class="nav-link fs-4">Ex2</RouterLink>
+        <RouterLink to="/ex3" class="nav-link fs-4">Ex3</RouterLink>
       </nav>
     </header>
     
-    <RouterView />
+    <main>
+      <div class="p-3">
+        <RouterView />
+      </div>
+    </main>
   </div>
 </template>
 
 <style scoped>
   .nav {
-    font-family: "New Amsterdam", sans-serif;
+    /* font-family: "New Amsterdam", sans-serif; */
   }
 </style>

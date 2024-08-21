@@ -1,66 +1,8 @@
 <script setup>
 // import TheWelcome from '../components/TheWelcome.vue'
-import { ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 
-const data = [{
-      id: 1,
-      name: "珍珠奶茶",
-      descrip: "香濃奶茶搭配QQ珍珠",
-      price: 50,
-      qty: 98
-    },
-    {
-      id: 2,
-      name: "冬瓜檸檬",
-      descrip: "清新冬瓜配上新鮮檸檬",
-      price: 45,
-      qty: 18
-    },
-    {
-      id: 3,
-      name: "翡翠檸檬",
-      descrip: "綠茶與檸檬的完美結合",
-      price: 55,
-      qty: 34
-    },
-    {
-      id: 4,
-      name: "四季春茶",
-      descrip: "香醇四季春茶，回甘無比",
-      price: 45,
-      qty: 10
-    },
-    {
-      id: 5,
-      name: "阿薩姆奶茶",
-      descrip: "檸檬與冰茶的清新組合",
-      price: 45,
-      qty: 20
-    },
-    {
-      id: 6,
-      name: "檸檬冰茶",
-      descrip: "檸檬與冰茶的清新組合",
-      price: 45,
-      qty: 5
-    },
-    {
-      id: 7,
-      name: "芒果綠茶",
-      descrip: "芒果與綠茶的獨特風味",
-      price: 55,
-      qty: 18
-    },
-    {
-      id: 8,
-      name: "抹茶拿鐵",
-      descrip: "抹茶與鮮奶的絕配",
-      price: 60,
-      qty: 20
-    }
-  ];
-
-  const drinks = ref(data);
+  const drinks = ref([]);
   const isEdit = ref(false);
   const isNew = ref(false);
   const tmp = ref({});
@@ -147,6 +89,85 @@ const data = [{
     return msg;
   }
 
+  const sum = computed(() => {
+    return drinks.value.reduce((pre, item) => pre + item.price, 0);
+  })
+
+  onMounted(() => {
+    // AJAX
+    setTimeout(() => {
+      drinks.value = [
+        {
+          id: 1,
+          name: "珍珠奶茶",
+          descrip: "香濃奶茶搭配QQ珍珠",
+          price: 50,
+          qty: 98
+        },
+        {
+          id: 2,
+          name: "冬瓜檸檬",
+          descrip: "清新冬瓜配上新鮮檸檬",
+          price: 45,
+          qty: 18
+        },
+        {
+          id: 3,
+          name: "翡翠檸檬",
+          descrip: "綠茶與檸檬的完美結合",
+          price: 55,
+          qty: 34
+        },
+        {
+          id: 4,
+          name: "四季春茶",
+          descrip: "香醇四季春茶，回甘無比",
+          price: 45,
+          qty: 10
+        },
+        {
+          id: 5,
+          name: "阿薩姆奶茶",
+          descrip: "檸檬與冰茶的清新組合",
+          price: 45,
+          qty: 20
+        },
+        {
+          id: 6,
+          name: "檸檬冰茶",
+          descrip: "檸檬與冰茶的清新組合",
+          price: 45,
+          qty: 5
+        },
+        {
+          id: 7,
+          name: "芒果綠茶",
+          descrip: "芒果與綠茶的獨特風味",
+          price: 55,
+          qty: 18
+        },
+        {
+          id: 8,
+          name: "抹茶拿鐵",
+          descrip: "抹茶與鮮奶的絕配",
+          price: 60,
+          qty: 20
+        }
+      ];
+    }, 1000);
+  });
+
+  // let intervalId;
+
+  // 重覆觸發
+  // intervalId = setInterval(() => {
+  //   console.log(1);
+  // }, 1000);
+
+  onUnmounted(() => {
+    // clearInterval(intervalId);
+  })
+
 </script>
 
 <template>
@@ -164,7 +185,7 @@ const data = [{
       </tr>
     </thead>
     <tbody>
-      <tr v-if="data.length === 0">
+      <tr v-if="drinks.length === 0">
         <td colspan="4" class="text-center"><div class="my-5">無貨啦! 快D新增</div></td>
       </tr>
       <tr v-for="drink in drinks" :key="drink.id">
@@ -185,6 +206,14 @@ const data = [{
         </td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <h5>品項總類: {{ sum }}</h5>
+          <button type="button" class="btn btn-primary">Button</button>
+        </td>
+      </tr>
+    </tfoot>
   </table>
   <div class="my-3" v-if="isEdit || isNew">
     <h3 class="text-secondary fw-bold">Edit Area - <span>{{ isEdit? "Edit": "Add" }}</span></h3>
@@ -211,11 +240,4 @@ const data = [{
   </div>
 </template>
 
-<style scoped>
-  h2,h3 {
-    font-family: "New Amsterdam", sans-serif;
-  }
-  table {
-    font-family: "Noto Sans TC", sans-serif;
-  }
-</style>
+<style scoped></style>

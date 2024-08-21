@@ -12,7 +12,9 @@
     "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {
+    "axios": "^1.7.4",
     "bootstrap": "^5.3.3",
+    "sass": "~1.77.1",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
@@ -25,7 +27,7 @@
     "eslint-plugin-vue": "^9.23.0",
     "gh-pages": "^6.1.1",
     "prettier": "^3.2.5",
-    "sass-embedded": "^1.77.8",
+    "sass-embedded": "^1.77.1",
     "vite": "^5.3.1",
     "vite-plugin-vue-devtools": "^7.3.1"
   }
