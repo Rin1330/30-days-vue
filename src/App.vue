@@ -3,8 +3,8 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="container">
-    <header>
+  <div>
+    <header class="container">
       <nav class="nav py-3">
         <RouterLink to="/" class="nav-link fs-4">Home</RouterLink>
         <RouterLink to="/ex1" class="nav-link fs-4">Ex1</RouterLink>

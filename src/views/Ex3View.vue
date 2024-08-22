@@ -1,7 +1,11 @@
 <template>
-  <div>
+  <div class="container">
     <HeaderView />
-    <CardView />
+    <div class="row">
+      <div class="col-4" v-for="i in 10" :key=i>
+        <CardView />
+      </div>
+    </div>
   </div>
 </template>
 

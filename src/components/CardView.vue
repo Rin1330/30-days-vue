@@ -1,5 +1,5 @@
 <template>
-  <div class="card" style="width: 18rem;">
+  <div class="card">
     <img src="https://miro.medium.com/v2/resize:fit:800/1*TOGHpRhMF0wGXhsrCga94w.png" class="card-img-top">
     <div class="card-body">
       <h5 class="card-title">Card title</h5>

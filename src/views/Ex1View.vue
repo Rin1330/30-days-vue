@@ -90,7 +90,7 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
   }
 
   const sum = computed(() => {
-    return drinks.value.reduce((pre, item) => pre + item.price, 0);
+    return drinks.value.reduce((pre, item) => Number(pre) + Number(item.price), 0);
   })
 
   onMounted(() => {
@@ -171,7 +171,8 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 </script>
 
 <template>
-  <div class="d-flex justify-content-between mb-2">
+  <div class="container">
+    <div class="d-flex justify-content-between mb-2">
     <h2 class="lh-sm mb-0">List of Drinks</h2>
     <button type="button" class="btn btn-primary d-inline-block" @click="editDrink({})">新增</button>
   </div>
@@ -196,7 +197,7 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
           <div class="btn-group me-2">
             <button type="button" class="btn btn-primary" @click="handleQty(drink.id, drink.qty - 1)" :disabled="drink.qty <= 0">-</button>
             <button type="button" class="border-start-0 border-end-0" disabled><span class="d-block text-dark" style="width: 50px;">{{ drink.qty }}</span></button>
-            <button type="button" class="btn btn-primary" @click="handleQty(drink.id, drink.qty + 1)" :disabled="drink.qty > 99">+</button>
+            <button type="button" class="btn btn-primary" @click="handleQty(drink.id, drink.qty + 1)" :disabled="drink.qty >= 99">+</button>
           </div>
 
           <div class="btn-group" role="group" aria-label="Basic example">
@@ -237,6 +238,7 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
       <button class="btn btn-primary me-2" type="button" @click="confirmEdit">確認</button>
       <button class="btn btn-danger" type="button" @click="cancelEdit">取消</button>
     </form>
+  </div>
   </div>
 </template>
 
