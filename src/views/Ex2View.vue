@@ -18,6 +18,9 @@
         <button type="button" @click="signUp" class="btn btn-primary mb-3">確定</button>
         <p>signupField: {{ signupField }}</p>
         <p>signup UID: {{ signupRes }}</p>
+        <div v-if="errMsgs">
+          <p v-for="errMsg of errMsgs" :key="errMsg">{{ errMsg }}</p>
+        </div>
       </div>
 
       <hr>
@@ -64,15 +67,21 @@ const signInField = ref({
   password: "",
 });
 
+const errMsgs = ref("");
+
 
 const signUp = async () => {
   try {
     const res = await axios.post(`${api}/users/sign_up`, signupField.value);
     console.log(res);
     signupRes.value = res.data.uid;
+    errMsgs.value = {};
   } catch (err) {
     console.log(err.response.data.message); 
+    alertMsg(err.response.data.message);
   }
+
+  signupField.value = {};
 }
 
 const signIn = async () => {
@@ -85,9 +94,11 @@ const signIn = async () => {
     console.log("Token: ", token.value);
   } catch (err) {
     console.log(err.response.data.message);
+    alertMsg(err.response.data.message);
   }
   const cookie = document.cookie.replace(/(?:(?:^|.*;\s*)Vue30daysCookie\s*=\s*([^;]*).*$)|^.*$/,"$1",);
   console.log(cookie);
+  signInField.value = {}
 }
 
 const signOut = async () => {
@@ -106,7 +117,19 @@ const signOut = async () => {
   } catch (error) {
     console.log(error);
   }
-  // console.log("signOut");
+  // console.log("signOut"); 
+}
+
+const alertMsg = (msg) => {
+  let status = null;
+  if (Array.isArray(msg))  {
+    status = true;
+    errMsgs.value = msg;
+  } else {
+    status = false; 
+  }
+
+  console.log("Status: ", status);
   
 }
 
